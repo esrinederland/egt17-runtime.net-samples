@@ -1,0 +1,26 @@
+﻿<Window x:Class="MarsLandings.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:esri="http://schemas.esri.com/arcgis/runtime/2013"
+        xmlns:vm="clr-namespace:MarsLandings.ViewModels"
+        xmlns:controller="clr-namespace:MarsLandings.Controllers"
+        xmlns:local="clr-namespace:MarsLandings"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <vm:MapViewModel x:Key="viewmodel" />
+    </Window.Resources>
+    <Grid DataContext="{ StaticResource viewmodel }">
+        <esri:SceneView x:Name="MyMapView" Scene="{ Binding Scene }"
+                           controller:CommandBinder.RequestView="{Binding ViewpointRequested }" />
+        <Border Background="White" BorderBrush="LightBlue" BorderThickness="2"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                Margin="30">
+            <ComboBox ItemsSource="{ Binding LandingSites }" IsEnabled="{ Binding LandingSitesEnabled }" 
+                      DisplayMemberPath="Name" SelectedItem="{ Binding SelectedLandingSite, Mode=TwoWay}">
+            </ComboBox>
+        </Border>
+    </Grid>
+</Window>
