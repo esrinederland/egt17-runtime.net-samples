@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MarsLandings"
+             xmlns:esri="clr-namespace:Esri.ArcGISRuntime.Xamarin.Forms;assembly=Esri.ArcGISRuntime.Xamarin.Forms"             
+             xmlns:controller="clr-namespace:MarsLandings.Controllers"
+             x:Class="MarsLandings.MainPage">
+    <Grid BackgroundColor="#293133">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label TextColor="White" Grid.Row="0" FontSize="Medium" HorizontalTextAlignment="Center">SELECT LANDING SITE</Label>
+            <Picker Grid.Row="1" BackgroundColor="LightGray" TextColor="White" HorizontalOptions="Fill" ItemsSource="{ Binding LandingSites }" IsEnabled="{Binding LandingSitesEnabled }" ItemDisplayBinding="{ Binding Name }" SelectedItem="{ Binding SelectedLandingSite, Mode=TwoWay}">
+            </Picker>
+        </Grid>
+        <esri:SceneView Grid.Row="1" x:Name="MyMapView" Scene="{ Binding Scene }"
+                            GraphicsOverlays="{ Binding Overlays }"
+                           controller:CommandBinder.RequestView="{Binding ViewpointRequested }" />
+    </Grid>
+
+</ContentPage>
